@@ -67,6 +67,7 @@ class Sql extends PDO
 		$stmt = $this->query($rawQuery, $params);
 		return "Usuário cadastrado! Seja bem-vindo!";
 	}
+
 }
 
 ?>

@@ -64,6 +64,47 @@ class Usuario
 		}
 	}
 
+	/*public function listAll()
+	{
+		$sql = new Sql();
+		$results = $sql->select("SELECT * FROM tb_usuarios ORDER BY deslogin");
+
+		foreach ($results as $row)
+		{
+			foreach($row as $key => $value)
+			{
+				echo "<strong>" . $key . ": </strong>" . $value . "<br>";
+			}
+
+			echo "##################################################<br>";
+		}
+	}*/
+
+
+
+	//Como neste método não se utiliza a palavra "$this", pode ser estático.
+	//Na prática, quando este método for invocado na index, não será preciso
+	//instanciar um objeto desta classe (Usuario).
+	public static function listAll()
+	{
+		$sql = new Sql();
+		return $sql->select("SELECT * FROM tb_usuarios ORDER BY deslogin");
+	}
+
+
+
+	//busca usuário por deslogin
+	public static function srcLogin($src)
+	{
+		$sql = new Sql();
+		return $sql->select("SELECT * FROM tb_usuarios WHERE deslogin LIKE :SRC ORDER BY deslogin", array(
+							'SRC'=>"%".$src."%"
+		));
+
+	}
+
+
+
 	public function __toString()
 	{
 		return json_encode(array("idusuario" => $this->getIdusuario(),
